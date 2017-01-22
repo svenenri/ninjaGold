@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Ninja Gold</title>
+		<meta name="description" content="Enter Content Description Here">
+		<link rel="stylesheet" type="text/css" href={{url_for("static", filename="style.css")}}>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript">
+
+		</script>
+	</head>
+	<body>
+		<div class="gold">
+			<p>Your Gold:</p>
+			<p id="score">{{session["yourGold"]}}</p>
+		</div>
+		<div class="buildings">
+			<p class="title">Farm</p>
+			<p>(earns 10-20 golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="building" value="farm" />
+			 	<input class="button" type="submit" value="Find Gold!"/>
+		  	</form>
+		</div>
+		<div class="buildings">
+			<p class="title">Cave</p>
+			<p>(earns 5-10 golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="building" value="cave" />
+	  		 	<input class="button" type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="buildings">
+			<p class="title">House</p>
+			<p>(earns 2-5 golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="building" value="house" />
+	  		  	<input class="button" type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="buildings">
+			<p class="title">Casino</p>
+			<p>(earns/takes 0-50 golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="building" value="casino" />
+	  		  	<input class="button" type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="activity">
+			<p>Activities:</p>
+			{% if session["activity"] == "": %}
+			<div class="border">
+
+			</div>
+			{% else: %}
+			<div class="border">
+				{% set count = session["counter"] %}
+				{% for count in session["activity"] %}
+					<p id="border">{{count}}<br></p>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+		<form id="reset" action="/reset">
+			<input class="button" type="submit" name="reset" value="Reset">
+		</form>
+	</body>
+</html>
